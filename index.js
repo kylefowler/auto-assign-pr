@@ -13,8 +13,19 @@ module.exports = (robot) => {
 
     if (config !== null && config.reviewers !== null && config.reviewers.length > 0) {
       const reviewers = config.reviewers
-      robot.log(payload.pull_request)
-      const reviewerIndex = payload.pull_request.number % reviewers.length;
+      const creator = payload.pull_request.user.login
+      const requiredReviewers = 2
+      var addedReviewers = 0;
+      var reviewersToAdd = []
+      while (addedReviewers < requiredReviewers) {
+        var reviewerIndex = payload.pull_request.number % reviewers.length;
+        var reviewer = reviewers[reviewerIndex];
+        if (reviewer !== creator) {
+          reviewersToAdd.push(reviewer);
+          addedReviewers++;
+        }
+      }
+      
       await github.pullRequests.createReviewRequest(context.issue({
         reviewers: [reviewers[reviewerIndex]],
         headers: {
