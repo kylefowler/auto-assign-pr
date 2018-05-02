@@ -17,13 +17,15 @@ module.exports = (robot) => {
       const requiredReviewers = 2
       var addedReviewers = 0;
       var reviewersToAdd = []
+      var mod = payload.pull_request.number
       while (addedReviewers < requiredReviewers) {
-        var reviewerIndex = payload.pull_request.number % reviewers.length;
+        var reviewerIndex = mod % reviewers.length;
         var reviewer = reviewers[reviewerIndex];
-        if (reviewer !== creator) {
+        if (reviewer !== creator && !reviewersToAdd.includes(reviewer)) {
           reviewersToAdd.push(reviewer);
           addedReviewers++;
         }
+        mod *= 17
       }
       
       await github.pullRequests.createReviewRequest(context.issue({
