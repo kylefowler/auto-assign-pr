@@ -2,9 +2,9 @@
   "name": "auto-assign-pr",
   "version": "1.0.0",
   "description": "",
-  "author": "Kyle Fowler <kyle@foursquare.com>",
+  "author": "Kyle Fowler <kyle.e.fowler@gmail.com>",
   "license": "ISC",
-  "repository": "https://github.com/foursquare/auto-assign-pr.git",
+  "repository": "https://github.com/kylefowler/auto-assign-pr.git",
   "scripts": {
     "dev": "nodemon --exec \"npm start\"",
     "start": "probot run ./index.js",
@@ -12,7 +12,6 @@
     "test": "jest && standard"
   },
   "dependencies": {
-    "@octokit/rest": "^15.2.6",
     "probot": "^6.0.0"
   },
   "devDependencies": {
@@ -22,7 +21,8 @@
     "standard": "^10.0.3"
   },
   "engines": {
-    "node": ">= 8.3.0"
+    "npm": "^5.6.0",
+    "node": "^10.0.0"
   },
   "standard": {
     "env": [
