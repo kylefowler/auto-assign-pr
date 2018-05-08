@@ -29,7 +29,7 @@ module.exports = (robot) => {
       }
       
       await github.pullRequests.createReviewRequest(context.issue({
-        reviewers: [reviewers[reviewerIndex]],
+        reviewers: reviewers,
         headers: {
           accept: 'application/vnd.github.mercy-preview+json'
         }
